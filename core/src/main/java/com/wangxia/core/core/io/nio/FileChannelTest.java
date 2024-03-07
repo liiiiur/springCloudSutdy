@@ -1,11 +1,11 @@
-package com.wangxia.core.core.io.netty;
+package com.wangxia.core.core.io.nio;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
-public class ByteBufferTest {
+public class FileChannelTest {
     public static void main(String[] args) {
         try (FileChannel channel = new FileInputStream("core/src/main/resources/doc/io测试.txt").getChannel()) {
             ByteBuffer buffer = ByteBuffer.allocate(10);//堆内存，读写效率低，受GC影响
