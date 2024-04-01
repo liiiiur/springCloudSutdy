@@ -3,6 +3,7 @@ package com.wangxia.order.controller;
 import com.wangxia.core.core.common.constant.AjaxResult;
 import com.wangxia.core.core.common.dto.OrderDto;
 import com.wangxia.order.domain.Order;
+import com.wangxia.order.remoteService.RemoteOrderService;
 import com.wangxia.order.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,8 +17,9 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "订单微服务")
 public class OrderController {
 
-    @Autowired
     private OrderService orderService;
+
+    private RemoteOrderService remoteOrderService;
 
     @Operation(description = "通过id获取订单",summary = "获取订单")
     @GetMapping("/{id}")

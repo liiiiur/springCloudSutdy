@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 * @createDate 2024-03-22 09:23:16
 */
 @Service
-public class PhotoServiceImpl extends ServiceImpl<PhotoMapper, Photo>
+public class  PhotoServiceImpl extends ServiceImpl<PhotoMapper, Photo>
     implements PhotoService{
 
 }

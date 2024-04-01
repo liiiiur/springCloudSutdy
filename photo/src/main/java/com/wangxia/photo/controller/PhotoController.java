@@ -5,29 +5,37 @@ package com.wangxia.photo.controller;
 import com.wangxia.core.core.common.dto.PhotoDto;
 import com.wangxia.photo.domain.Photo;
 import com.wangxia.photo.service.PhotoService;
+import com.wangxia.photo.service.impl.PhotoServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("/photo")
+@RestController
 @Tag(name = "照片微服务模块",description = "照片CRUD")
+@RequestMapping("/photo")
 public class PhotoController {
 
-    private final PhotoService photoService;
+    private static final Logger log = LoggerFactory.getLogger(PhotoController.class);
+    @Autowired
+    private PhotoServiceImpl photoService;
 
-    public PhotoController(@Autowired PhotoService photoService) {
-        this.photoService = photoService;
-    }
-
-    @GetMapping("/{id}")
+    @GetMapping("/get")
     @Operation(summary = "通过id查询照片",description = "通过id查询照片")
-    public PhotoDto getPhotoById(@PathVariable("id") String id) {
-        Photo photo = photoService.getById(id);
-        PhotoDto photoDto = new PhotoDto();
-        BeanUtils.copyProperties(photo,photoDto);
-        return photoDto;
+    public PhotoDto getPhotoById(@RequestParam("id") String id) {
+
+        try {
+            Photo photo = photoService.getById(id);
+            PhotoDto photoDto = new PhotoDto();
+            BeanUtils.copyProperties(photo,photoDto);
+            return photoDto;
+        }catch (Exception e){
+            log.error(e.getMessage(),e);
+        }
+        return null;
     }
 
     @PostMapping("/save")

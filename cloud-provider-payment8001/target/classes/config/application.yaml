@@ -1,0 +1,17 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: payment
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 95938
+    url: jdbc:mysql://localhost:3307/photo
+  cloud:
+    nacos:
+      discovery:
+        username: nacos
+        password: nacos
+
+

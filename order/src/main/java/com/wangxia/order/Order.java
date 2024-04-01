@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@EnableFeignClients
+@EnableFeignClients(basePackages = "com.wangxia.order.remoteService")
 @EnableDiscoveryClient
 @MapperScan("com.wangxia.order.mapper")
 public class Order {
