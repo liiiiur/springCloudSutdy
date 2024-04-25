@@ -1,6 +1,7 @@
 package com.wangxia.order;
 
 import org.mybatis.spring.annotation.MapperScan;
+import org.mybatis.spring.annotation.MapperScans;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -8,9 +9,12 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@EnableFeignClients(basePackages = "com.wangxia.order.remoteService")
+@EnableFeignClients(basePackages = "com.wangxia.core.core.common.api")
 @EnableDiscoveryClient
-@MapperScan("com.wangxia.order.mapper")
+@MapperScans({
+        @MapperScan("com.wangxia.order.mapper"),
+        @MapperScan("com.wangxia.core.core.common.mapper")
+})
 public class Order {
     public static void main(String[] args) {
         SpringApplication.run(Order.class,args);

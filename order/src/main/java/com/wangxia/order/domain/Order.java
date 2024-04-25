@@ -19,9 +19,9 @@ import lombok.Data;
 @Data
 public class Order extends BaseEntity implements Serializable {
     /**
-     * 
+     *
      */
-    @TableId
+    @TableId(type = IdType.ASSIGN_UUID)
     private String orderId;
 
     /**
@@ -38,6 +38,11 @@ public class Order extends BaseEntity implements Serializable {
      * 目标产品id
      */
     private String productId;
+
+    /**
+     * 用户id
+     */
+    private String userId;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

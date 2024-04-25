@@ -14,3 +14,9 @@ spring:
         username: nacos
         password: nacos
         server-addr: localhost:8848
+seata:
+  registry: { type: nacos, nacos: { username: nacos,password: nacos,server-addr: localhost:8848, namespace: "", group: SEATA_GROUP, application: seata-server } }
+  tx-service-group: seata-wangxia
+  service:
+    vgroup-mapping:
+      seata-wangxia: default

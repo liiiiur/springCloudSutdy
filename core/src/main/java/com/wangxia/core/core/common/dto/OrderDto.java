@@ -20,4 +20,14 @@ public class OrderDto {
      * 价格
      */
     private BigDecimal price;
+
+    /**
+     * 目标产品Id
+     */
+    private String productId;
+
+    /**
+     * 用户id
+     */
+    private String userId;
 }

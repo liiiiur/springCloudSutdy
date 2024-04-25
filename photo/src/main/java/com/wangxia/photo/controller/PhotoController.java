@@ -2,6 +2,8 @@ package com.wangxia.photo.controller;
 
 
 
+import com.wangxia.core.core.common.api.RemotePhotoService;
+import com.wangxia.core.core.common.constant.AjaxResult;
 import com.wangxia.core.core.common.dto.PhotoDto;
 import com.wangxia.photo.domain.Photo;
 import com.wangxia.photo.service.PhotoService;
@@ -22,6 +24,16 @@ public class PhotoController {
     private static final Logger log = LoggerFactory.getLogger(PhotoController.class);
     @Autowired
     private PhotoServiceImpl photoService;
+
+    @Autowired
+    private RemotePhotoService  remotePhotoService;
+
+
+    @GetMapping("/test")
+    public AjaxResult test(){
+        PhotoDto photo = remotePhotoService.getPhotoById("1771358206665289729");
+        return AjaxResult.success(photo);
+    }
 
     @GetMapping("/get")
     @Operation(summary = "通过id查询照片",description = "通过id查询照片")

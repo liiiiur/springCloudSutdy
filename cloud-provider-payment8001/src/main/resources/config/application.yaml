@@ -13,5 +13,25 @@ spring:
       discovery:
         username: nacos
         password: nacos
+seata:
+  registry: { type: nacos,
+              nacos: {
+                password: nacos,
+                username: nacos,
+                server-addr: 127.0.0.1:8848,
+                namespace: "",
+                group: SEATA_GROUP,
+                application: seata-server
+              }
+  }
+  tx-service-group: seata-wangxia
+  service:
+    vgroup-mapping:
+      seata-wangxia: default
+
+rocketmq:
+  name-server: localhost:9876
+  producer:
+    group: pay
 
 

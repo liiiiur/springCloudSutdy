@@ -1,8 +1,28 @@
 server:
   port: 8000
 spring:
+  application:
+    name: core
   cloud:
     nacos:
       discovery:
         username: nacos
         password: nacos
+  datasource:
+    username: root
+    password: 95938
+    url: jdbc:mysql://localhost:3307/core
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  security:
+    user:
+      password: 1
+  data:
+    redis:
+      url: localhost:6379
+      database: 0
+
+
+
+local:
+  security:
+    whiteList: /common/**
