@@ -14,19 +14,17 @@
 </template>
 
 <script lang="ts" setup>
-import {reactive} from 'vue'
-import request from '../../utils/request.js'
+import {reactive,getCurrentInstance} from 'vue'
 // do not use same name with ref
 const form = reactive({
   username: '',
   password: ''
 })
 
+const {proxy}=getCurrentInstance()
+
 const login = () => {
-  request.post('http://localhost:8000/common/login', {
-    username: form.username,
-    password: form.password
-  })
+
 }
 const register = () => {
 

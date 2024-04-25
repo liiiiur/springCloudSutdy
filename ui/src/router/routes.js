@@ -12,7 +12,7 @@ const routes=[
         component:()=>import('@/pages/index/Login.vue')
     },
     {
-        path: '/',
+        path: '/register',
         name: 'register',
         title: '注册',
         component:()=>import('@/pages/index/Register.vue')

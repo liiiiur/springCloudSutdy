@@ -13,10 +13,7 @@ import java.util.List;
 
 import com.wangxia.core.core.common.entity.BaseEntity;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+
 
 /**
  * 
@@ -24,7 +21,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 @TableName(value ="User")
 @Data
-public class LoginUser extends BaseEntity implements Serializable, UserDetails {
+public class LoginUser extends BaseEntity implements Serializable {
 
     @TableId(type = IdType.ASSIGN_UUID)
     private Long id;
@@ -54,32 +51,4 @@ public class LoginUser extends BaseEntity implements Serializable, UserDetails {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        roles.forEach(x->authorities.add(new SimpleGrantedAuthority(x)));
-        return authorities;
-    }
-
-    //是否 没过期？
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    //是否可用
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }

@@ -8,7 +8,6 @@ import com.wangxia.core.core.common.mapper.UserMapper;
 import com.wangxia.core.core.common.utils.StringUtils;
 import jakarta.annotation.Resource;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,7 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, LoginUser>
-         implements UserService, UserDetailsService, UserDetailsPasswordService {
+         implements UserService{
 
     public boolean validateUser(LoginUser user) {
         return !StringUtils.isEmpty(user.getUsername()) && !StringUtils.isEmpty(user.getPassword());
@@ -26,9 +25,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, LoginUser>
 
     @Override
     public void createUser(LoginUser user) {
-        UserDetails userDetails = User.withUserDetails(user)
-                .build();
-        user.setPassword(userDetails.getPassword());
+//        UserDetails userDetails = User.withUserDetails(user)
+//                .build();
+//        user.setPassword(userDetails.getPassword());
         this.save(user);
     }
 
@@ -42,30 +41,26 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, LoginUser>
 
 
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//
+//        String userKey = USER_CACHE_PREFIX + username;
+//        LoginUser user = (LoginUser) redisTemplate.opsForValue().get(userKey);
+//        if (user == null) {
+//            QueryWrapper<LoginUser> wrapper = new QueryWrapper<>();
+//
+//            wrapper.eq("username", username);
+//
+//            user = userMapper.selectOne(wrapper);
+//
+//            if (user == null) {
+//                throw new UsernameNotFoundException(username);
+//            }
+//            redisTemplate.opsForValue().set(userKey+username,user.toString());
+//        }
+//        return user;
+//    }
 
-        String userKey = USER_CACHE_PREFIX + username;
-        LoginUser user = (LoginUser) redisTemplate.opsForValue().get(userKey);
-        if (user == null) {
-            QueryWrapper<LoginUser> wrapper = new QueryWrapper<>();
-
-            wrapper.eq("username", username);
-
-            user = userMapper.selectOne(wrapper);
-
-            if (user == null) {
-                throw new UsernameNotFoundException(username);
-            }
-            redisTemplate.opsForValue().set(userKey+username,user.toString());
-        }
-        return user;
-    }
-
-    @Override
-    public UserDetails updatePassword(UserDetails user, String newPassword) {
-        return null;
-    }
 }
 
 

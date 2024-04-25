@@ -33,24 +33,24 @@ service.interceptors.response.use(
 );
 
 // 定义各种访问后端的方法
-const request = {
+const request = class {
     // 发送 GET 请求
-    get(url, params) {
+    static get(url, params) {
         return service.get(url, { params });
-    },
+    }
 
     // 发送 POST 请求
-    post(url, data) {
+    static post(url, data) {
         return service.post(url, data);
-    },
+    }
 
     // 发送 PUT 请求
-    put(url, data) {
+    static put(url, data) {
         return service.put(url, data);
-    },
+    }
 
     // 发送 DELETE 请求
-    delete(url) {
+    static delete(url) {
         return service.delete(url);
     }
 };
