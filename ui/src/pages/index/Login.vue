@@ -13,20 +13,26 @@
   </el-form>
 </template>
 
-<script lang="ts" setup>
-import {reactive,getCurrentInstance} from 'vue'
-// do not use same name with ref
-const form = reactive({
-  username: '',
-  password: ''
-})
-
-const {proxy}=getCurrentInstance()
-
-const login = () => {
-
-}
-const register = () => {
-
+<script>
+export default {
+  data(){
+    return {
+      form:{}
+    }
+  },
+  methods:{
+    login(){
+      this.$http.post().then(data=>{
+        if(data.isSucceed){
+          this.$router.push({name:'index'})
+        }
+      })
+    }
+  }
 }
 </script>
+
+<style>
+
+
+</style>

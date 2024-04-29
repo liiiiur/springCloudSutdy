@@ -13,6 +13,13 @@ export default defineConfig({
             '@': fileURLToPath(new URL('./src', import.meta.url))
         }
     },
+
+    optimizeDeps:{
+        include:[
+            '@dataview/datav-vue3'
+        ]
+    },
+
     server: {
         port: 80,
         proxy: {

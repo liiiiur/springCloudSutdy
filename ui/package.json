@@ -9,8 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@dataview/datav-vue3": "^0.0.0-test.1672506674342",
     "axios": "^1.6.8",
     "element-plus": "^2.7.0",
+    "vform3-builds": "^3.0.10",
     "vite-plugin-pages": "^0.32.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.2"

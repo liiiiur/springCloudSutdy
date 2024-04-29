@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/photo
+    username: root
+    password: 95938
+  cloud:
+    nacos:
+      discovery:
+        username: nacos
+        password: nacos
+        server-addr: 47.120.7.238:8848
+        ip: 47.120.7.238
+  data:
+    redis:
+      host: 47.120.7.238
+
+
+seata:
+  registry: { type: nacos, nacos: { username: nacos,password: nacos,server-addr: 47.120.7.238:8848, namespace: "", group: SEATA_GROUP, application: seata-server } }
+  tx-service-group: seata-wangxia
+  service:
+    vgroup-mapping:
+      seata-wangxia: default

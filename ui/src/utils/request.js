@@ -4,6 +4,9 @@ import axios from "axios";
 const service = axios.create({
     baseURL: '/api', // 后端 API 地址
     timeout: 10000, // 请求超时时间
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'//默认以formdata形式发送数据
+    }
 });
 
 // 请求拦截器
@@ -33,26 +36,26 @@ service.interceptors.response.use(
 );
 
 // 定义各种访问后端的方法
-const request = class {
+const request = {
     // 发送 GET 请求
-    static get(url, params) {
-        return service.get(url, { params });
-    }
+    get(url, params) {
+        return service.get(url, {params});
+    },
 
     // 发送 POST 请求
-    static post(url, data) {
+    post(url, data) {
         return service.post(url, data);
-    }
+    },
 
     // 发送 PUT 请求
-    static put(url, data) {
+    put(url, data) {
         return service.put(url, data);
-    }
+    },
 
     // 发送 DELETE 请求
-    static delete(url) {
+    delete(url) {
         return service.delete(url);
-    }
+    },
 };
 
 export default request;
