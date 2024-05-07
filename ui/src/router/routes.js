@@ -6,7 +6,8 @@ const routes=[
         component:()=>import('@/pages/index/Index.vue')
     },
     {
-        path: '/login',
+        path: '/' +
+            '',
         name: 'login',
         title: '登录',
         component:()=>import('@/pages/index/Login.vue')

@@ -5,3 +5,4 @@ spring:
     name: photoService
   profiles:
     active: dev
+

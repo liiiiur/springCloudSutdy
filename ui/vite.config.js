@@ -14,11 +14,6 @@ export default defineConfig({
         }
     },
 
-    optimizeDeps:{
-        include:[
-            '@dataview/datav-vue3'
-        ]
-    },
 
     server: {
         port: 80,
