@@ -23,7 +23,7 @@ public class PhotoController {
 
     private static final Logger log = LoggerFactory.getLogger(PhotoController.class);
     @Autowired
-    private PhotoServiceImpl photoService;
+    private PhotoService photoService;
 
     @Autowired
     private RemotePhotoService  remotePhotoService;

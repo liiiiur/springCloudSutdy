@@ -2,6 +2,7 @@ package com.wangxia.photo.service;
 
 import com.wangxia.photo.domain.Photo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wangxia.photo.dto.PictureDto;
 
 /**
 * @author liur
@@ -9,5 +10,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2024-03-22 09:23:16
 */
 public interface PhotoService extends IService<Photo> {
+
+    String savePicture(Photo photo, PictureDto pictureDto);
 
 }

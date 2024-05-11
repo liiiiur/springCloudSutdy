@@ -7,7 +7,7 @@ import java.net.Socket;
 
 public class BIOServer {
     public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(12345);
+        ServerSocket serverSocket = new ServerSocket(6666);
         while (true) {
             // 阻塞直到有客户端连接
             Socket socket = serverSocket.accept();
