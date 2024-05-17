@@ -23,12 +23,8 @@ public class BioMain {
                 stringBuilder.append(str);
             }
             System.out.println(stringBuilder);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
-
 }
