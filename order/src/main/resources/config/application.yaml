@@ -1,0 +1,32 @@
+server:
+  port: 8002
+spring:
+  application:
+    name: orderService
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/order
+    username: root
+    password: 95938
+  cloud:
+    nacos:
+      discovery:
+        username: nacos
+        password: nacos
+        server-addr: localhost:8848
+seata:
+  registry: {
+    type: nacos,
+    nacos: {
+      password: nacos,
+      username: nacos,
+      server-addr: 192.168.88.1:8848,
+      namespace: "",
+      group: SEATA_GROUP,
+      application: seata-server,
+    }
+  }
+  tx-service-group: seata-wangxia
+  service:
+    vgroup-mapping:
+      seata-wangxia: default
