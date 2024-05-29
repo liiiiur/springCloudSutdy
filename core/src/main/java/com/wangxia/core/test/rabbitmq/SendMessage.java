@@ -8,6 +8,7 @@ import com.rabbitmq.client.DeliverCallback;
 
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 public class SendMessage {
@@ -17,12 +18,25 @@ public class SendMessage {
         final Connection connection=factory.newConnection();
         final Channel channel=connection.createChannel();
 
+        String message1="Hello World";
+
         channel.queueDeclare("test",false,false,false,null);
 
         DeliverCallback deliverCallback=((consumerTag, message) -> {
-            System.out.println("test");
+            System.out.println("consumerTag:"+consumerTag+" message:"+message);
+            channel.basicAck(message.getEnvelope().getDeliveryTag(), false);
+
         });
 
-        channel.basicConsume("test",true,deliverCallback,consumerTag -> {});
+        channel.exchangeDeclare("testExchange","direct");
+        channel.queueDeclare("testQueue",false,false,false,null);
+
+        channel.queueBind("testQueue","testExchange","test");
+
+        channel.basicPublish("testExchange","test",null,message1.getBytes(StandardCharsets.UTF_8));
+
+        channel.basicConsume("testQueue",false,deliverCallback,consumerTag -> {
+            System.out.println("consumerTag:"+consumerTag);
+        });
     }
 }

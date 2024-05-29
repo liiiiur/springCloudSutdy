@@ -10,9 +10,7 @@ public class InsertSort implements IArraySort{
         for (int i = 1; i < ints.length; i++) {
             for (int j = i - 1; j >= 0; j--) {
                 if (ints[j] > ints[j + 1]) {
-                    int temp = ints[j];
-                    ints[j] = ints[j + 1];
-                    ints[j + 1] = temp;
+                    Util.swap(array, j, j + 1);
                 }
             }
         }

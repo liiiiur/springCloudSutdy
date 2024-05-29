@@ -4,16 +4,21 @@ import java.util.Arrays;
 
 public class SortTest {
     public static void main(String[] args) {
-        int[] testArray = new int[]{45,12,35,84,24,65,1,65,3,2,23};
+        int[] testArray = Util.generateRandomArray(100,10);
+        int[] clone1 = testArray.clone();
+        int[] clone2 = testArray.clone();
+        int[] clone3 = testArray.clone();
 
         BubbleSort bubbleSort = new BubbleSort();
         SelectionSort selectionSort = new SelectionSort();
         InsertSort insertSort = new InsertSort();
+        bubbleSort.sort(clone1);
+        selectionSort.sort(clone2);
+        insertSort.sort(clone3);
 
+        System.out.println("selectionSort result: "+Util.compare(clone1, clone2));
+        System.out.println("insertSort result: "+Util.compare(clone1, clone3));
 
-        System.out.println("bubbleSort"+Arrays.toString(bubbleSort.sort(testArray)));
-        System.out.println("selectionSort"+Arrays.toString(selectionSort.sort(testArray)));
-        System.out.println("insertSort"+Arrays.toString(insertSort.sort(testArray)));
 
     }
 }
