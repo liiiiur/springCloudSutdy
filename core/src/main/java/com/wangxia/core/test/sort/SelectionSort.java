@@ -1,20 +1,20 @@
 package com.wangxia.core.test.sort;
 
-import java.util.Arrays;
 
-public class SelectionSort implements IArraySort{
+public class SelectionSort implements IArraySort {
     @Override
     public int[] sort(int[] array) {
         for (int i = 0; i < array.length; i++) {
-            int min = i;
+            int min = array[i];
+            int minIndex = i;
             for (int j = i + 1; j < array.length; j++) {
-                if (array[min] > array[j]) {
-                    min=j;
-                }
+                 if(min > array[j]) {
+                     min = array[j];
+                     minIndex = j;
+                 }
             }
-            if(min!=i){
-                Util.swap(array, i, min);
-            }
+            array[minIndex] = array[i];
+            array[i] = min;
         }
         return array;
     }

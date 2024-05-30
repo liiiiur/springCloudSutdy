@@ -5,16 +5,15 @@ import java.util.Arrays;
 public class BubbleSort implements IArraySort{
     @Override
     public int[] sort(int[] array) {
-        int[] ints = Arrays.copyOf(array, array.length);
 
-        for (int i = 0; i < ints.length; i++) {
-            for (int j = 0; j<ints.length-i-1; j++) {
-                if(ints[j] > ints[j+1]){
-                    Util.swap(ints, j, j+1);
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j<array.length-i-1; j++) {
+                if(array[j] > array[j+1]){
+                    Util.swap(array, j, j+1);
                 }
             }
         }
 
-        return ints;
+        return array;
     }
 }

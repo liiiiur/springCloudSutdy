@@ -4,20 +4,57 @@ import java.util.Arrays;
 
 public class SortTest {
     public static void main(String[] args) {
-        int[] testArray = Util.generateRandomArray(100,10);
-        int[] clone1 = testArray.clone();
-        int[] clone2 = testArray.clone();
-        int[] clone3 = testArray.clone();
+
 
         BubbleSort bubbleSort = new BubbleSort();
         SelectionSort selectionSort = new SelectionSort();
         InsertSort insertSort = new InsertSort();
-        bubbleSort.sort(clone1);
-        selectionSort.sort(clone2);
-        insertSort.sort(clone3);
 
-        System.out.println("selectionSort result: "+Util.compare(clone1, clone2));
-        System.out.println("insertSort result: "+Util.compare(clone1, clone3));
+        for (int i = 0; i < 100; i++) {
+
+            int[] testArray = Util.generateRandomArray(100,10);
+            int[] clone1 = testArray.clone();
+            Arrays.sort(testArray);
+            bubbleSort.sort(clone1);
+            if(!Util.compare(testArray, clone1)){
+                System.out.println("bubble sort failed");
+                break;
+            }
+        }
+
+        for (int i = 0; i < 100; i++) {
+
+            int[] testArray = Util.generateRandomArray(100,10);
+            int[] clone2 = testArray.clone();
+
+            Arrays.sort(testArray);
+            selectionSort.sort(clone2);
+            if(!Util.compare(testArray, clone2)){
+                System.out.println("selection sort failed");
+                break;
+            }
+        }
+
+        for (int i = 0; i < 100; i++) {
+
+            int[] testArray = Util.generateRandomArray(100,10);
+
+            int[] clone3 = testArray.clone();
+
+            Arrays.sort(testArray);
+            insertSort.sort(clone3);
+            if(!Util.compare(testArray, clone3)){
+                System.out.println("insert sort failed");
+                break;
+            }
+        }
+
+
+
+
+
+
+
 
 
     }
