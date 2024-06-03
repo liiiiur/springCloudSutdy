@@ -1,38 +1,34 @@
 package com.wangxia.core.test.sort;
 
-import java.util.Arrays;
-
 public class QuickSort implements IArraySort {
 
     @Override
     public int[] sort(int[] sourceArray) {
-        // 对 arr 进行拷贝，不改变参数内容
-        int[] arr = Arrays.copyOf(sourceArray, sourceArray.length);
-
-        return quickSort(arr, 0, arr.length - 1);
+        return quickSort(sourceArray, 0, sourceArray.length - 1);
     }
 
     private int[] quickSort(int[] arr, int left, int right) {
         if (left < right) {
-            int partitionIndex = partition(arr, left, right);
-            quickSort(arr, left, partitionIndex - 1);
-            quickSort(arr, partitionIndex + 1, right);
+            int[] partition = partition(arr, left, right);
+            quickSort(arr, left, partition[0]);
+            quickSort(arr,partition[1] , right);
         }
         return arr;
     }
 
-    private int partition(int[] arr, int left, int right) {
-        // 设定基准值（pivot）
-        int pivot = left;
-        int index = pivot + 1;
-        for (int i = index; i <= right; i++) {
-            if (arr[i] < arr[pivot]) {
-                Util.swap(arr, i, index);
-                index++;
+    private int[] partition(int[] arr, int left, int right) {
+        int pivot = arr[right],l1 = left-1,l2 = right,i=left;
+        while (i<l2){
+            if(arr[i]<pivot){
+                Util.swap(arr,++l1,i++);
+            }else if(arr[i]>pivot){
+                Util.swap(arr,--l2,i);
+            }else {
+                i++;
             }
         }
-        Util.swap(arr, pivot, index - 1);
-        return index - 1;
+        Util.swap(arr,l2,right);
+        return new int[]{l1,l2};
     }
 
 

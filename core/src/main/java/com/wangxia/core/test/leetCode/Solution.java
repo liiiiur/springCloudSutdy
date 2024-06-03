@@ -1,21 +1,20 @@
 package com.wangxia.core.test.leetCode;
 
+import com.wangxia.core.test.sort.QuickSort;
+import com.wangxia.core.test.sort.Util;
+
 import java.util.Arrays;
 import java.util.HashMap;
 
 public class Solution {
 
     public static void main(String[] args) {
-        int[] difficulty = {1,3,5,6};
-        
-        int[] a=new int[5];
-        int[][] b=new int[5][];
-        a[2]=2;
+        int[] difficulty = Util.generateRandomArray(10, 10);
+        int[] ll = new int[]{1, 11,6,4,8,6, 5,2,8,5,7, 9, 5, 4, 6};
 
-
-
-        int maxProfit = searchInsert(difficulty,2);
-        System.out.println(maxProfit);
+        QuickSort quickSort = new QuickSort();
+        quickSort.sort(ll);
+        System.out.println(Arrays.toString(ll));
 
     }
 
@@ -101,5 +100,24 @@ public class Solution {
         return maxProfit;
     }
 
+    private static void helanSort(int[] nums) {
+        int l1 = -1, l2 = nums.length,i=0;
+        int num=nums[nums.length-1];
+        while (i < l2) {
+            if(nums[i]<num){
+                l1++;
+                Util.swap(nums, l1, i);
+                i++;
+            }else if(nums[i]>num){
+                --l2;
+                Util.swap(nums, l2, i);
+            }else {
+                i++;
+            }
+        }
+        System.out.println("l1:"+l1);
+        System.out.println("l2:"+l2);
+
+    }
 
 }

@@ -9,6 +9,7 @@ public class SortTest {
         BubbleSort bubbleSort = new BubbleSort();
         SelectionSort selectionSort = new SelectionSort();
         InsertSort insertSort = new InsertSort();
+        QuickSort quickSort = new QuickSort();
 
         for (int i = 0; i < 100; i++) {
 
@@ -49,7 +50,20 @@ public class SortTest {
             }
         }
 
+        for (int i = 0; i < 100; i++) {
 
+            int[] testArray = Util.generateRandomArray(100,10);
+
+            int[] clone = testArray.clone();
+
+            Arrays.sort(testArray);
+            quickSort.sort(clone
+            );
+            if(!Util.compare(testArray, clone)){
+                System.out.println("quick sort failed");
+                break;
+            }
+        }
 
 
 
