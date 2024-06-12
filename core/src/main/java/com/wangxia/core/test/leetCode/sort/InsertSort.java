@@ -1,6 +1,5 @@
-package com.wangxia.core.test.sort;
+package com.wangxia.core.test.leetCode.sort;
 
-import java.util.Arrays;
 
 public class InsertSort implements IArraySort{
     @Override

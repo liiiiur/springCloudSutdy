@@ -1,4 +1,4 @@
-package com.wangxia.core.test.sort;
+package com.wangxia.core.test.leetCode.sort;
 
 
 public class SelectionSort implements IArraySort {

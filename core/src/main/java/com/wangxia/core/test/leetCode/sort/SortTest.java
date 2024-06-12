@@ -1,4 +1,4 @@
-package com.wangxia.core.test.sort;
+package com.wangxia.core.test.leetCode.sort;
 
 import java.util.Arrays;
 
@@ -10,6 +10,7 @@ public class SortTest {
         SelectionSort selectionSort = new SelectionSort();
         InsertSort insertSort = new InsertSort();
         QuickSort quickSort = new QuickSort();
+        HeapSort heapSort = new HeapSort();
 
         for (int i = 0; i < 100; i++) {
 
@@ -61,6 +62,21 @@ public class SortTest {
             );
             if(!Util.compare(testArray, clone)){
                 System.out.println("quick sort failed");
+                break;
+            }
+        }
+
+        for (int i = 0; i < 100; i++) {
+
+            int[] testArray = Util.generateRandomArray(100,10);
+
+            int[] clone = testArray.clone();
+
+            Arrays.sort(testArray);
+            heapSort.sort(clone
+            );
+            if(!Util.compare(testArray, clone)){
+                System.out.println("heap sort failed");
                 break;
             }
         }

@@ -1,21 +1,40 @@
 package com.wangxia.core.test.leetCode;
 
-import com.wangxia.core.test.sort.QuickSort;
-import com.wangxia.core.test.sort.Util;
+
+import com.wangxia.core.test.leetCode.listNode.ListNode;
+import com.wangxia.core.test.leetCode.listNode.ListSolution;
+import com.wangxia.core.test.leetCode.sort.Util;
+import com.wangxia.core.test.leetCode.twoTree.TreeNode;
 
 import java.util.Arrays;
 import java.util.HashMap;
 
+
 public class Solution {
 
     public static void main(String[] args) {
-        int[] difficulty = Util.generateRandomArray(10, 10);
-        int[] ll = new int[]{1, 11,6,4,8,6, 5,2,8,5,7, 9, 5, 4, 6};
 
-        QuickSort quickSort = new QuickSort();
-        quickSort.sort(ll);
-        System.out.println(Arrays.toString(ll));
+        ListNode listNode = new ListNode(1);
+        listNode.next=new ListNode(2);
+        listNode.next.next=new ListNode(3);
+        listNode.next.next.next=new ListNode(3);
+        listNode.next.next.next.next=new ListNode(2);
+        listNode.next.next.next.next.next=new ListNode(1);
 
+
+        TreeNode treeNode = new TreeNode(1);
+        treeNode.right=new TreeNode(2);
+        treeNode.left=new TreeNode(10);
+        treeNode.right.left=new TreeNode(3);
+
+        TreeNode treeNode1 = new TreeNode(1);
+
+        ListNode listNode1 = ListSolution.removeDuplicateNodes(listNode);
+
+        while (listNode1 != null) {
+            System.out.println(listNode1.data);
+            listNode1=listNode1.next;
+        }
     }
 
     public static int searchInsert(int[] nums, int target) {
