@@ -1,21 +1,20 @@
-package com.wangxia.core.test.sort;
+package com.wangxia.core.test.leetCode.sort;
 
-import java.util.Arrays;
 
 public class InsertSort implements IArraySort{
     @Override
     public int[] sort(int[] array) {
-        int[] ints = Arrays.copyOf(array, array.length);
 
-        for (int i = 1; i < ints.length; i++) {
+
+        for (int i = 1; i < array.length; i++) {
             for (int j = i - 1; j >= 0; j--) {
-                if (ints[j] > ints[j + 1]) {
+                if (array[j] > array[j + 1]) {
                     Util.swap(array, j, j + 1);
                 }
             }
         }
 
-        return ints;
+        return array;
 
     }
 }

@@ -1,22 +1,40 @@
 package com.wangxia.core.test.leetCode;
 
+
+import com.wangxia.core.test.leetCode.listNode.ListNode;
+import com.wangxia.core.test.leetCode.listNode.ListSolution;
+import com.wangxia.core.test.leetCode.sort.Util;
+import com.wangxia.core.test.leetCode.twoTree.TreeNode;
+
 import java.util.Arrays;
 import java.util.HashMap;
+
 
 public class Solution {
 
     public static void main(String[] args) {
-        int[] difficulty = {1,3,5,6};
-        
-        int[] a=new int[5];
-        int[][] b=new int[5][];
-        a[2]=2;
+
+        ListNode listNode = new ListNode(1);
+        listNode.next=new ListNode(2);
+        listNode.next.next=new ListNode(3);
+        listNode.next.next.next=new ListNode(3);
+        listNode.next.next.next.next=new ListNode(2);
+        listNode.next.next.next.next.next=new ListNode(1);
 
 
+        TreeNode treeNode = new TreeNode(1);
+        treeNode.right=new TreeNode(2);
+        treeNode.left=new TreeNode(10);
+        treeNode.right.left=new TreeNode(3);
 
-        int maxProfit = searchInsert(difficulty,2);
-        System.out.println(maxProfit);
+        TreeNode treeNode1 = new TreeNode(1);
 
+        ListNode listNode1 = ListSolution.removeDuplicateNodes(listNode);
+
+        while (listNode1 != null) {
+            System.out.println(listNode1.data);
+            listNode1=listNode1.next;
+        }
     }
 
     public static int searchInsert(int[] nums, int target) {
@@ -101,5 +119,24 @@ public class Solution {
         return maxProfit;
     }
 
+    private static void helanSort(int[] nums) {
+        int l1 = -1, l2 = nums.length,i=0;
+        int num=nums[nums.length-1];
+        while (i < l2) {
+            if(nums[i]<num){
+                l1++;
+                Util.swap(nums, l1, i);
+                i++;
+            }else if(nums[i]>num){
+                --l2;
+                Util.swap(nums, l2, i);
+            }else {
+                i++;
+            }
+        }
+        System.out.println("l1:"+l1);
+        System.out.println("l2:"+l2);
+
+    }
 
 }

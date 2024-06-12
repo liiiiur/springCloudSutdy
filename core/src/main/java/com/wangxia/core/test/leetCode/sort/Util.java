@@ -1,4 +1,4 @@
-package com.wangxia.core.test.sort;
+package com.wangxia.core.test.leetCode.sort;
 
 public class Util {
     public static void swap(int[] arr, int i, int j) {
