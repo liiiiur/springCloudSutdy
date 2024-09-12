@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,7 +22,7 @@ public class OrderController {
 
     @Operation(description = "通过id获取订单",summary = "获取订单")
     @GetMapping("/{id}")
-    public AjaxResult getOrderById(@PathVariable("id") Integer id) {
+    public AjaxResult getOrderById(@PathVariable("id") String id) {
         return AjaxResult.success(orderService.getById(id));
     }
 

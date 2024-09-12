@@ -1,5 +1,7 @@
 package com.wangxia.core.test.leetCode.sort;
 
+import com.wangxia.core.test.leetCode.Util;
+
 public class QuickSort implements IArraySort {
 
     @Override

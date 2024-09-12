@@ -3,7 +3,6 @@ package com.wangxia.core.test.leetCode;
 
 import com.wangxia.core.test.leetCode.listNode.ListNode;
 import com.wangxia.core.test.leetCode.listNode.ListSolution;
-import com.wangxia.core.test.leetCode.sort.Util;
 import com.wangxia.core.test.leetCode.twoTree.TreeNode;
 
 import java.util.Arrays;
@@ -32,7 +31,7 @@ public class Solution {
         ListNode listNode1 = ListSolution.removeDuplicateNodes(listNode);
 
         while (listNode1 != null) {
-            System.out.println(listNode1.data);
+            System.out.println(listNode1.val);
             listNode1=listNode1.next;
         }
     }

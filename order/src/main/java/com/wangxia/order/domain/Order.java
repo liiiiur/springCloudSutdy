@@ -6,9 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
-import com.wangxia.core.core.common.entity.BaseEntity;
+import com.wangxia.core.core.common.entity.NoIdBaseEntity;
 import lombok.Data;
 
 /**
@@ -17,7 +16,7 @@ import lombok.Data;
  */
 @TableName(value ="o_order")
 @Data
-public class Order extends BaseEntity implements Serializable {
+public class Order extends NoIdBaseEntity implements Serializable {
     /**
      *
      */

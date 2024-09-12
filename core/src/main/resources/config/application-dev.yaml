@@ -1,25 +1,22 @@
-server:
-  port: 8000
 spring:
   application:
     name: core
   cloud:
     nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        namespace: 02e29b95-aa01-4c1e-aa7d-8b65956c8fa1
+        extension-configs:
+          - data-id: core-dev.yaml
+            refresh: true
+          - data-id: common-dev.yaml
+            refresh: true
+          - data-id: security-dev.yaml
+            refresh: true
       discovery:
-        username: nacos
-        password: nacos
-  datasource:
-    username: root
-    password: 95938
-    url: jdbc:mysql://localhost:3307/core
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  security:
-    user:
-      password: 1
-  data:
-    redis:
-      url: localhost:6379
-      database: 0
-    mongodb:
-      uri: mongodb://47.120.7.238:27017/test
-
+        namespace:
+  config:
+    import:
+      - nacos:core-dev.yaml
+      - nacos:common-dev.yaml
+      - nacos:security-dev.yaml

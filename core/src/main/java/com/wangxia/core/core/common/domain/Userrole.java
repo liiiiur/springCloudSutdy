@@ -15,16 +15,16 @@ import lombok.Data;
  */
 @TableName(value ="UserRole")
 @Data
-public class Userrole extends BaseEntity implements Serializable {
+public class Userrole implements Serializable {
     /**
      *
      */
-    private Integer userId;
+    private String userId;
 
     /**
      * 
      */
-    private Integer roleId;
+    private String roleId;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

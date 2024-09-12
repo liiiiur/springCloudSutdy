@@ -1,5 +1,6 @@
 package com.wangxia.order;
 
+import com.wangxia.core.core.common.Packages;
 import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.annotation.MapperScans;
 import org.springframework.boot.SpringApplication;
@@ -9,8 +10,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@EnableFeignClients(basePackages = "com.wangxia.core.core.common.api")
 @EnableDiscoveryClient
+@ComponentScan(basePackages = {Packages.core,Packages.order})
 @MapperScans({
         @MapperScan("com.wangxia.order.mapper"),
         @MapperScan("com.wangxia.core.core.common.mapper")

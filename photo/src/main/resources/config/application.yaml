@@ -1,8 +1,6 @@
 server:
   port: 8003
 spring:
-  application:
-    name: photoService
   profiles:
     active: dev
 

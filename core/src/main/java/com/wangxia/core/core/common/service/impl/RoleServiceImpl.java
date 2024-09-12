@@ -15,6 +15,16 @@ import org.springframework.stereotype.Service;
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role>
     implements RoleService{
 
+    @Override
+    public Boolean saveRole(Role role) {
+        if(role==null){
+            return false;
+        }
+        if(!role.getName().startsWith("ROLE_")){
+            role.setName("ROLE_"+role.getName());
+        }
+        return this.save(role);
+    }
 }
 
 

@@ -19,4 +19,9 @@
         created_name,created_time,modified_name,
         modified_time
     </sql>
+    <select id="selectByUserId" resultType="com.wangxia.core.core.common.domain.Role">
+        select * from Role where id in (
+            select UserRole.role_id from UserRole where user_id=#{userId}
+            )
+    </select>
 </mapper>

@@ -9,5 +9,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2024-04-11 12:59:36
 */
 public interface RoleService extends IService<Role> {
-
+    Boolean saveRole(Role role);
 }

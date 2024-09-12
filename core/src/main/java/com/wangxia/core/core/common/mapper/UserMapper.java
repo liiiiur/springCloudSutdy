@@ -1,7 +1,7 @@
 package com.wangxia.core.core.common.mapper;
 
-import com.wangxia.core.core.common.domain.LoginUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.wangxia.core.core.common.domain.User;
 
 /**
 * @author liur
@@ -9,8 +9,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2024-04-11 12:59:45
 * @Entity com.wangxia.core.core.common.domain.User
 */
-public interface UserMapper extends BaseMapper<LoginUser> {
+public interface UserMapper extends BaseMapper<User> {
 
+    User selectByName(String username);
 }
 
 

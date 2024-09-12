@@ -1,14 +1,16 @@
 package com.wangxia.core.test.leetCode.listNode;
 
 public class ListNode {
-    public int data;
+    public int val;
 
     public ListNode next;
+
+    public ListNode last;
 
     public ListNode(){}
 
     public ListNode(int data) {
-        this.data = data;
+        this.val = val;
     }
 
 }
