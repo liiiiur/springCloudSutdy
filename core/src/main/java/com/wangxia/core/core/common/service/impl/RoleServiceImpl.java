@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wangxia.core.core.common.domain.Role;
 import com.wangxia.core.core.common.service.RoleService;
 import com.wangxia.core.core.common.mapper.RoleMapper;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 * @createDate 2024-04-11 12:59:36
 */
 @Service
+@Primary
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role>
     implements RoleService{
 

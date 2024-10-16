@@ -20,3 +20,8 @@ spring:
       - nacos:core-dev.yaml
       - nacos:common-dev.yaml
       - nacos:security-dev.yaml
+logging:
+  level:
+    org:
+      springframework:
+        security: debug

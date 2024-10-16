@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wangxia.core.core.common.domain.RolePermission;
 import com.wangxia.core.core.common.service.RolePermissionService;
 import com.wangxia.core.core.common.mapper.RolePermissionMapper;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 * @createDate 2024-09-09 17:16:26
 */
 @Service
+@Primary
 public class RolePermissionServiceImpl extends ServiceImpl<RolePermissionMapper, RolePermission>
     implements RolePermissionService{
 

@@ -19,12 +19,6 @@ public class Photo extends BaseEntity implements Serializable {
     /**
      * 
      */
-    @TableId
-    private String id;
-
-    /**
-     * 
-     */
     private String name;
 
     /**
@@ -32,29 +26,7 @@ public class Photo extends BaseEntity implements Serializable {
      */
     private String url;
 
-    /**
-     * 
-     */
-    private Date createdTime;
 
-    /**
-     * 
-     */
-    private String createdName;
-
-    /**
-     * 
-     */
-    private String modifiedName;
-
-    /**
-     * 
-     */
-    private Date modifiedTime;
-
-    /**
-     * 
-     */
     private Integer age;
 
     /**

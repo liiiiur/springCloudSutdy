@@ -22,26 +22,6 @@ public class PhotoDto {
     /**
      *
      */
-    private Date createdTime;
-
-    /**
-     *
-     */
-    private String createdName;
-
-    /**
-     *
-     */
-    private String modifiedName;
-
-    /**
-     *
-     */
-    private Date modifiedTime;
-
-    /**
-     *
-     */
     private Integer age;
 
     /**

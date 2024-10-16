@@ -1,31 +1,30 @@
 package com.wangxia.core.core.common.component;
 
 
+import cn.hutool.core.convert.NumberWithFormat;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wangxia.core.core.common.dto.LoginUserDto;
-import com.wangxia.core.core.common.service.CustomUserDetailService;
 import com.wangxia.core.core.common.utils.TokenUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.concurrent.TimeUnit;
 
 @Component
+@ConditionalOnProperty(name = "isEnableSecurity",havingValue = "true",matchIfMissing = false)
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-
-    @Autowired
-    private CustomUserDetailService customUserDetailService;
 
     @Autowired
     private TokenUtil tokenUtil;
@@ -42,17 +41,22 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String authToken = null;
 
         if (header != null) {
-            String usernameToken = tokenUtil.getUsernameFromToken(header);
-            authToken = (String) redisTemplate.opsForValue().get(TOKEN_PREFIX + usernameToken);
-            if(authToken!=null&&tokenUtil.verifyToken(authToken)){
-                username = tokenUtil.getUsernameFromToken(authToken);
-                redisTemplate.opsForValue().set(TOKEN_PREFIX + usernameToken,authToken,60, TimeUnit.MINUTES);
+            NumberWithFormat time = (NumberWithFormat) tokenUtil.getValue(header, "exp");
+            if(time!=null&&time.longValue()>System.currentTimeMillis()){
+                String usernameToken = tokenUtil.getUsernameFromToken(header);
+                authToken = (String) redisTemplate.opsForValue().get(TOKEN_PREFIX + usernameToken);
+                if(authToken!=null&&tokenUtil.verifyToken(authToken)){
+                    username = tokenUtil.getUsernameFromToken(authToken);
+                    redisTemplate.opsForValue().set(TOKEN_PREFIX + usernameToken,authToken,60, TimeUnit.MINUTES);
+                }
             }
         }
 
         if(username != null&& SecurityContextHolder.getContext().getAuthentication()==null){
-            LoginUserDto userDetails = customUserDetailService.loadUserByUsername(username);
             if (tokenUtil.verifyToken(authToken)) {
+                String string = tokenUtil.getValue(authToken, "user").toString();
+                ObjectMapper mapper = new ObjectMapper();
+                LoginUserDto userDetails = mapper.readValue(string, LoginUserDto.class);
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, header, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

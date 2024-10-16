@@ -7,32 +7,74 @@ import com.wangxia.core.test.leetCode.twoTree.TreeNode;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
 
 public class Solution {
 
     public static void main(String[] args) {
+        int[] arr = {0, 1};
+        int i = hIndex(arr);
+        System.out.println(i);
+    }
 
-        ListNode listNode = new ListNode(1);
-        listNode.next=new ListNode(2);
-        listNode.next.next=new ListNode(3);
-        listNode.next.next.next=new ListNode(3);
-        listNode.next.next.next.next=new ListNode(2);
-        listNode.next.next.next.next.next=new ListNode(1);
+    public static String reserveString(String str) {
+        char[] charArray = str.toCharArray();
+        reserve(charArray, 0, charArray.length - 1);
+        int start = 0;
+        for (int end = 0; end < charArray.length; end++) {
+            if (charArray[end] == ' ') {
+                reserve(charArray, start, end - 1);
+                start = end + 1;
+            }
+        }
+        reserve(charArray, start, charArray.length - 1);
+        char[] chars = trimSpaces(charArray);
+        return new String(chars);
+    }
+
+    private static char[] trimSpaces(char[] chars) {
+        int n = chars.length;
+        StringBuilder sb = new StringBuilder();
+
+        boolean spaceFound = false;
+        for (char aChar : chars) {
+            if (aChar != ' ') {
+                sb.append(aChar);
+                spaceFound = false;
+            } else if (!spaceFound) {
+                sb.append(' '); // 只添加一个空格
+                spaceFound = true;
+            }
+        }
+
+        return sb.toString().toCharArray();
+    }
+
+    /**
+     * 力扣274 H指数
+     *
+     * @param citations
+     * @return
+     */
+    public static int hIndex(int[] citations) {
+        Arrays.sort(citations);
+        int count=citations.length-1;
+
+        int h;
+        return 0;
+    }
 
 
-        TreeNode treeNode = new TreeNode(1);
-        treeNode.right=new TreeNode(2);
-        treeNode.left=new TreeNode(10);
-        treeNode.right.left=new TreeNode(3);
+    private static void reserve(char[] arr, int left, int right) {
 
-        TreeNode treeNode1 = new TreeNode(1);
-
-        ListNode listNode1 = ListSolution.removeDuplicateNodes(listNode);
-
-        while (listNode1 != null) {
-            System.out.println(listNode1.val);
-            listNode1=listNode1.next;
+        while (left < right) {
+            char temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
+            left++;
+            right--;
         }
     }
 
@@ -53,6 +95,16 @@ public class Solution {
         }
         return mid;
 
+    }
+
+    public int numberOfPoints(List<List<Integer>> nums) {
+        HashSet<Integer> set = new HashSet();
+        nums.forEach(x -> {
+            for (int start = x.get(1); start <= x.get(2); start++) {
+                set.add(start);
+            }
+        });
+        return set.size();
     }
 
     public static int pivotIndex(int[] nums) {
@@ -119,22 +171,22 @@ public class Solution {
     }
 
     private static void helanSort(int[] nums) {
-        int l1 = -1, l2 = nums.length,i=0;
-        int num=nums[nums.length-1];
+        int l1 = -1, l2 = nums.length, i = 0;
+        int num = nums[nums.length - 1];
         while (i < l2) {
-            if(nums[i]<num){
+            if (nums[i] < num) {
                 l1++;
                 Util.swap(nums, l1, i);
                 i++;
-            }else if(nums[i]>num){
+            } else if (nums[i] > num) {
                 --l2;
                 Util.swap(nums, l2, i);
-            }else {
+            } else {
                 i++;
             }
         }
-        System.out.println("l1:"+l1);
-        System.out.println("l2:"+l2);
+        System.out.println("l1:" + l1);
+        System.out.println("l2:" + l2);
 
     }
 

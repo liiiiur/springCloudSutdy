@@ -2,29 +2,33 @@ package com.wangxia.core.core.common.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wangxia.core.core.common.constant.AjaxResult;
+import com.wangxia.core.core.common.domain.LoginHis;
 import com.wangxia.core.core.common.domain.Role;
 import com.wangxia.core.core.common.domain.User;
-import com.wangxia.core.core.common.domain.Userrole;
 import com.wangxia.core.core.common.dto.LoginUserDto;
+import com.wangxia.core.core.common.mapper.LoginHisMapper;
 import com.wangxia.core.core.common.mapper.RoleMapper;
-import com.wangxia.core.core.common.mapper.UserroleMapper;
+import com.wangxia.core.core.common.remoteService.RemoteLoginService;
 import com.wangxia.core.core.common.service.UserService;
 import com.wangxia.core.core.common.mapper.UserMapper;
-import com.wangxia.core.core.common.utils.CookieUtil;
+import com.wangxia.core.core.common.utils.IpUtil;
 import com.wangxia.core.core.common.utils.TokenUtil;
-import com.wangxia.core.core.common.utils.jwt.JWTUtil;
-import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+
 
 /**
  * @author liur
@@ -32,30 +36,31 @@ import java.util.concurrent.TimeUnit;
  * @createDate 2024-04-11 12:59:45
  */
 @Service
+@Primary
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
-         implements UserService{
+         implements UserService, UserDetailsService {
     
     private final String userRedisKey = "User-Token:";
 
     private final String cookieRedisKey = "Cookie-Token:";
+
+    @Autowired
+    private RemoteLoginService remoteLoginService;
     
     @Autowired
     private UserMapper userMapper;
 
     @Autowired
-    private UserroleMapper userroleMapper;
+    private RoleMapper roleMapper;
 
     @Autowired
-    private RoleMapper roleMapper;
+    private LoginHisMapper loginHisMapper;
     
     @Autowired
     private RedisTemplate redisTemplate;
 
     @Autowired
     private TokenUtil tokenUtil;
-
-    @Autowired
-    private CookieUtil cookieUtil;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
     
@@ -78,26 +83,51 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     }
 
     @Override
-    public String login(User loginUser) {
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("username", loginUser.getUsername());
-        User user = userMapper.selectOne(queryWrapper);
+    public String login(User loginUser, HttpServletRequest request) {
+        LoginUserDto user = loadUserByUsername(loginUser.getUsername());
         if(user == null){
             throw new RuntimeException("用户不存在");
         }else {
             if(bCryptPasswordEncoder.matches(loginUser.getPassword(), user.getPassword())){
-                String token = tokenUtil.generateToken(user.getUsername());
+                String ip = IpUtil.getIp(request);
+
+                HashMap<String, Object> tokenMap = new HashMap<>();
+                tokenMap.put("ip", ip);
+                tokenMap.put("user", user);
+                tokenMap.put("username", user.getUsername());
+
+                String token = tokenUtil.generateToken(tokenMap);
 
                 // 保存用户信息到redis
                 redisTemplate.opsForValue().set(userRedisKey + user.getUsername(), token,60, TimeUnit.MINUTES);
-                String o = (String) redisTemplate.opsForValue().get(userRedisKey + user.getUsername());
-                HashMap<String, Object> cookieMap = new HashMap<>();
-                cookieMap.put("username", user.getUsername());
-                String cookieToken = tokenUtil.generateToken(cookieMap);
-                return cookieToken;
+
+                //保存登录记录
+
+                LoginHis loginHis = new LoginHis();
+                loginHis.setUsername(user.getUsername());
+                loginHis.setIp(ip);
+                loginHis.setLoginTime(LocalDateTime.now());
+                loginHisMapper.insert(loginHis);
+
+                return tokenUtil.generateToken(user.getUsername(),ip);
             }else {
                 throw new RuntimeException("密码错误");
             }
+        }
+    }
+
+    @Override
+    public LoginUserDto loadUserByUsername(String username) throws UsernameNotFoundException {
+        AjaxResult result = remoteLoginService.findUserByUsername(username);
+        Object data = result.get("data");
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            String userJson = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(data);
+            LoginUserDto user = mapper.readValue(userJson, LoginUserDto.class);
+            return user;
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
     }
 

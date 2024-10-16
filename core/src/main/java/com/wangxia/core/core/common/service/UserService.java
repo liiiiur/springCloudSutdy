@@ -4,6 +4,7 @@ import com.wangxia.core.core.common.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wangxia.core.core.common.dto.LoginUserDto;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 
 
 /**
@@ -17,7 +18,7 @@ public interface UserService extends IService<User> {
 
     String createUser(User user);
 
-    String login(User user);
+    String login(User user, HttpServletRequest request);
 
     LoginUserDto getUserByUsername(String username);
 }

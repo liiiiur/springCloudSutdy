@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wangxia.core.core.common.domain.Userrole;
 import com.wangxia.core.core.common.service.UserroleService;
 import com.wangxia.core.core.common.mapper.UserroleMapper;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 * @createDate 2024-04-11 12:59:58
 */
 @Service
+@Primary
 public class UserroleServiceImpl extends ServiceImpl<UserroleMapper, Userrole>
     implements UserroleService{
 

@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 @FeignClient("photoService")
 public interface RemotePhotoService {
 
-    @GetMapping("/photo/get")
-    PhotoDto getPhotoById(@RequestParam("id") String id);
+    @GetMapping("/photo/get/{id}")
+    PhotoDto getPhotoById(@PathVariable("id") String id);
 
     @PostMapping("/save")
     Boolean savePhoto(@RequestBody PhotoDto photoDto);

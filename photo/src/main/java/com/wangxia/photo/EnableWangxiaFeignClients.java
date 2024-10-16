@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 public @interface EnableWangxiaFeignClients {
     String[] value() default {};
 
-    String[] basePackages() default { "com.wangxia" };
+    String[] basePackages() default { "com.wangxia.core" };
 
     Class<?>[] basePackageClasses() default {};
 

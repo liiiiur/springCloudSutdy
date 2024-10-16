@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -31,7 +30,7 @@ public class OrderController {
 
         Order order = new Order();
         BeanUtils.copyProperties(orderDto, order);
-        boolean save = orderService.save(order);
+        boolean save = orderService.saveOrder(order);
         if(save){
             return AjaxResult.success();
         }

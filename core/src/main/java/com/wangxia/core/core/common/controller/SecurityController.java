@@ -13,6 +13,7 @@ import com.wangxia.core.core.common.service.UserroleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -38,7 +39,6 @@ public class SecurityController {
         this.userroleService = userroleService;
     }
 
-    @Operation(description = "新增用户",summary = "新增用户")
     @RequestMapping(method = RequestMethod.POST,value = "/user")
     public AjaxResult addUser(@RequestBody User user){
         if(userService.isHaveUser(user)){
@@ -58,21 +58,18 @@ public class SecurityController {
         return AjaxResult.success(userByUsername);
     }
 
-    @Operation(description = "新增角色",summary = "新增角色")
     @RequestMapping(method = RequestMethod.POST,value = "/role")
     public AjaxResult addRole(@RequestBody Role role){
         boolean save = roleService.saveRole(role);
         return AjaxResult.success(save);
     }
 
-    @Operation(description = "新增权限",summary = "新增权限")
     @RequestMapping(method = RequestMethod.POST,value = "/permission")
     public AjaxResult addPermission(@RequestBody Permission permission){
         boolean save = permissionService.save(permission);
         return AjaxResult.success(save);
     }
 
-    @Operation(description = "新增用户角色",summary = "新增用户角色")
     @PostMapping("/userrole")
     public AjaxResult addUserrole(@RequestBody Userrole userrole){
         boolean save = userroleService.save(userrole);

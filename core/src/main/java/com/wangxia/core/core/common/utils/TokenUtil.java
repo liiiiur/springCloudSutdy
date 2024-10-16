@@ -16,10 +16,11 @@ public class TokenUtil {
         return JWTUtil.createToken(payload,SECRET_KEY.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String generateToken(String username) {
+    public String generateToken(String username,String IP) {
         HashMap<String, Object> payload = new HashMap<>();
         payload.put("username", username);
-        payload.put("exp", System.currentTimeMillis() + (1000 * 60 * 60 * 24));
+        payload.put("ip", IP);
+        payload.put("exp", System.currentTimeMillis() + (1000 * 60 * 60));
 
         return JWTUtil.createToken(payload,SECRET_KEY.getBytes(StandardCharsets.UTF_8));
     }
@@ -28,8 +29,14 @@ public class TokenUtil {
         return JWTUtil.verify(token, SECRET_KEY.getBytes(StandardCharsets.UTF_8));
     }
 
+    public Object getValue(String token,String key) {
+        JWT jwt = JWTUtil.parseToken(token);
+        return jwt.getPayload(key);
+    }
+
     public String getUsernameFromToken(String token) {
         JWT jwt=JWTUtil.parseToken(token);
         return jwt.getPayload("username").toString();
     }
+
 }

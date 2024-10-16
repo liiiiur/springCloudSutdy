@@ -29,15 +29,14 @@ public class PhotoController {
     private RemotePhotoService  remotePhotoService;
 
 
-    @GetMapping("/test")
-    public AjaxResult test(){
-        PhotoDto photo = remotePhotoService.getPhotoById("1771358206665289729");
+    @GetMapping("/{id}")
+    public AjaxResult getById(@PathVariable("id") String id) {
+        PhotoDto photo = remotePhotoService.getPhotoById(id);
         return AjaxResult.success(photo);
     }
 
-    @GetMapping("/get")
-    @Operation(summary = "通过id查询照片",description = "通过id查询照片")
-    public PhotoDto getPhotoById(@RequestParam("id") String id) {
+    @GetMapping("/get/{id}")
+    public PhotoDto getPhotoById(@PathVariable("id") String id) {
 
         try {
             Photo photo = photoService.getById(id);
@@ -51,7 +50,6 @@ public class PhotoController {
     }
 
     @PostMapping("/save")
-    @Operation(summary = "保存",description = "保存照片")
     public Boolean savePhoto(@RequestBody PhotoDto photoDto) {
         Photo photo = new Photo();
         BeanUtils.copyProperties(photoDto,photo);

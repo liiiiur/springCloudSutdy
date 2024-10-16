@@ -5,10 +5,11 @@ import com.wangxia.core.core.common.utils.CreateTime;
 import com.wangxia.core.core.common.utils.UpdateBy;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class NoIdBaseEntity {
+public class NoIdBaseEntity implements Serializable {
     @CreateBy
     private String createdName;
 

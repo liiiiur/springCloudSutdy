@@ -39,7 +39,7 @@
             <artifactId>spring-cloud-loadbalancer</artifactId>
         </dependency>
 
-
+        <!--SpringBoot 监控-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
