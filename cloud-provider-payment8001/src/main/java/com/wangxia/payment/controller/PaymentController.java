@@ -1,11 +1,11 @@
 package com.wangxia.payment.controller;
 
-import com.wangxia.core.core.common.api.RemoteOrderService;
-import com.wangxia.core.core.common.api.RemotePhotoService;
-import com.wangxia.core.core.common.constant.AjaxResult;
-import com.wangxia.core.core.common.dto.OrderDto;
-import com.wangxia.core.core.common.dto.PaymentDto;
-import com.wangxia.core.core.common.dto.PhotoDto;
+import com.wangxia.core.common.api.RemoteOrderService;
+import com.wangxia.core.common.api.RemotePhotoService;
+import com.wangxia.core.common.constant.AjaxResult;
+import com.wangxia.core.common.dto.OrderDto;
+import com.wangxia.core.common.dto.PaymentDto;
+import com.wangxia.core.common.dto.PhotoDto;
 import io.seata.spring.annotation.GlobalTransactional;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,7 +1,7 @@
 package com.wangxia.order.controller;
 
-import com.wangxia.core.core.common.constant.AjaxResult;
-import com.wangxia.core.core.common.dto.OrderDto;
+import com.wangxia.core.common.constant.AjaxResult;
+import com.wangxia.core.common.dto.OrderDto;
 import com.wangxia.order.domain.Order;
 import com.wangxia.order.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;

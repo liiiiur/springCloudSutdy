@@ -2,15 +2,24 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wangxia.core.core.common.mapper.RolePermissionMapper">
+<mapper namespace="com.wangxia.core.common.mapper.RolePermissionMapper">
 
-    <resultMap id="BaseResultMap" type="com.wangxia.core.core.common.domain.RolePermission">
-            <result property="id" column="id" jdbcType="VARCHAR"/>
+    <resultMap id="BaseResultMap" type="com.wangxia.core.common.domain.RolePermission">
             <result property="permissionId" column="permission_id" jdbcType="VARCHAR"/>
             <result property="roleId" column="role_id" jdbcType="VARCHAR"/>
     </resultMap>
+    <insert id="insertAll">
+        insert into RolePermission (permission_id, role_id) 
+        values 
+            <foreach collection="addList" item="item" separator=",">
+                (#{item.permissionId},#{item.roleId})
+            </foreach>
+    </insert>
+    <delete id="removeByRoleId">
+        delete from RolePermission where role_id=#{id}
+    </delete>
 
-    <sql id="Base_Column_List">
-        id,permission_id,role_id
-    </sql>
+    <select id="selectByRoleId" resultType="com.wangxia.core.common.domain.RolePermission">
+        select * from RolePermission where role_id=#{roleId}
+    </select>
 </mapper>

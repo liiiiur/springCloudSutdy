@@ -1,12 +1,10 @@
 package com.wangxia.photo.domain;
 
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.util.Date;
 
-import com.wangxia.core.core.common.entity.BaseEntity;
+import com.wangxia.core.common.entity.BaseEntity;
 import lombok.Data;
 
 /**

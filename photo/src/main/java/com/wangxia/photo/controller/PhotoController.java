@@ -2,12 +2,11 @@ package com.wangxia.photo.controller;
 
 
 
-import com.wangxia.core.core.common.api.RemotePhotoService;
-import com.wangxia.core.core.common.constant.AjaxResult;
-import com.wangxia.core.core.common.dto.PhotoDto;
+import com.wangxia.core.common.api.RemotePhotoService;
+import com.wangxia.core.common.constant.AjaxResult;
+import com.wangxia.core.common.dto.PhotoDto;
 import com.wangxia.photo.domain.Photo;
 import com.wangxia.photo.service.PhotoService;
-import com.wangxia.photo.service.impl.PhotoServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;

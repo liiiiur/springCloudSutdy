@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import com.wangxia.core.core.common.entity.NoIdBaseEntity;
+import com.wangxia.core.common.entity.NoIdBaseEntity;
 import lombok.Data;
 
 /**

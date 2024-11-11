@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wangxia.core.core.common.mapper.RoleMapper">
+<mapper namespace="com.wangxia.core.common.mapper.RoleMapper">
 
-    <resultMap id="BaseResultMap" type="com.wangxia.core.core.common.domain.Role">
+    <resultMap id="BaseResultMap" type="com.wangxia.core.common.domain.Role">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="name" column="name" jdbcType="VARCHAR"/>
             <result property="description" column="description" jdbcType="VARCHAR"/>
@@ -19,7 +19,7 @@
         created_name,created_time,modified_name,
         modified_time
     </sql>
-    <select id="selectByUserId" resultType="com.wangxia.core.core.common.domain.Role">
+    <select id="selectByUserId" resultType="com.wangxia.core.common.domain.Role">
         select * from Role where id in (
             select UserRole.role_id from UserRole where user_id=#{userId}
             )

@@ -1,8 +1,8 @@
 package com.wangxia.order.remoteService;
 
 
-import com.wangxia.core.core.common.constant.AjaxResult;
-import com.wangxia.core.core.common.dto.OrderDto;
+import com.wangxia.core.common.constant.AjaxResult;
+import com.wangxia.core.common.dto.OrderDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
